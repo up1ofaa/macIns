@@ -1,0 +1,23 @@
+1. git 초기 설정
+1) 사용자 정보설정
+$ git config --global user.name "이름"
+$ git config --global user.email "아매알"
+
+2. 설정 정보확인
+$git config --list
+
+3. git 저장소 생성
+1) 기존 디렉토리 사용
+git을 사용할 프로젝트 디렉토리로 이동후 git init명령어를 실행해줌
+$ls -al
+2) 저장소 복제(clone) 사용
+$git clone "저장할주소 url"
+
+example ---------------------------------
+git config --global user.name hySung
+git config --global user.email up1ofpt@hanmail.net
+git config --list
+cd /Users/hy/Desktop/work
+git init
+ls -al
+git clone https://github.com/up1ofaa/macIns.git
