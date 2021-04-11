@@ -1,32 +1,4 @@
-프로젝트 생성
- 
- 1. Dependency 및  plugin 설치
- C:\User\hy\Desktop\codeInfo 경로에 설치하기
-1)React설치
-npm install --save react react-dom
-
-2)프로젝트 생성
-mkdir react-fundamentals
-cd react-fundamentals
-npm init
-3)개발 의존 모듈 설치
-npm install --save-dev babel-core bable-loader babel-preSet-es2015 bable-preSet-react
-npm install --save-dev react-hot-loader webpack-dev-server
-
-위치에 node_modules폴더와 package-lock.json파일 생성되어있음
-
-
-
-
-3.webpack설정하기
-1) 경로 아래폴더,파일과 동등한 위치에 생성
-node_modules
-package-lock.json
-webpack.config.js 
-2) webpack.config.js  파일 내용
 var webpack=requre('webpack'); //webpack 불러오기
-
-
 
 module.exports ={
     entry:'/src/index.js', //합칠파일
