@@ -57,3 +57,7 @@ module.exports ={
         new webpack.HotModuleReplacementPlugin()
     ]
 };
+
+3)package.json
+script에 "dev-server":"webpack-dev-server"
+npm run "dev-server"
