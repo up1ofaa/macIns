@@ -29,3 +29,8 @@ https://github.com/up1ofaa/macIns.git
 
 commit
 commit on main
+
+
+---------------------------------------
+원격git repository에서 로컬로 내용 복사하기
+git clone https://github.com/up1ofaa/macIns.git codeInfo
