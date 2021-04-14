@@ -2,18 +2,57 @@
  
  1. Dependency 및  plugin 설치
  C:\User\hy\Desktop\codeInfo 경로에 설치하기
-1)React설치
-npm install --save react react-dom
+ C:\Users\hy\Desktop\codeInfo\codeInfo\reactPj\rpj
 
-2)프로젝트 생성
-mkdir react-fundamentals
-cd react-fundamentals
-npm init
+sudo npm install -g webpack webpack-dev-server
+
+1)프로젝트 생성
+mkdir rpj
+cd rpj
+npm init 
+//package.json 파일 생성
+
+npm i -D webpack wepack-cli
+2)React설치
+npm install --save react react-dom 
+//위치에 node_modules폴더와 package-lock.json파일 생성되어있음
+
+
+
 3)개발 의존 모듈 설치
-npm install --save-dev babel-core bable-loader babel-preSet-es2015 bable-preSet-react
-npm install --save-dev react-hot-loader webpack-dev-server
+npm i -D webpack webpack-cli
+npm install -g webpack
+npm install -g webpack-dev-server
+npm install -D webpack-dev-server
 
-위치에 node_modules폴더와 package-lock.json파일 생성되어있음
+이 C:\Users\{사용자이름}\AppData\Roaming\npm 를 고급 시스템 설정 > 환경 변수 에서 시스템 변수 'Path'에 추가해 준다.
+npm install --save-dev @babel/core bable-loader babel-preset-env 
+npm install --save-dev @babel/preset-react
+npm install --save-dev @babel/preset-env
+//npm uninstall --save-dev babel
+npm uninstall --save-dev babel-core
+npm install --save-dev babel-loader
+npm install --save-dev babel-loader@7
+
+npm install -D babel-loader@latest @babel/core@latest @babel/preset-env@latest
+npm install -D @babel/preset-react
+npm install --save-dev react-hot-loader webpack webpack-dev-server
+//npm install webpack-cli -D  dsfd
+
+
+
+
+npm run dev-server 실행시 아래 와 같이 
+Cannot find module 'webpack-cli/bin/config-yargs' 오류메시지
+
+webpack 과 webpack-dev-server 버전이 서로간 충돌로 인해서 아래와 같이 버전을 맞춰 주면 됩니다.
+설치가 안되면 관리자 권한 sudo 를 통해 실행하시면 됩니다.
+
+
+npm uninstall webpack -g
+npm uninstall -g webpack-dev-server
+sudo npm install webpack@3.8.0 --save-dev 
+npm install webpack-dev-server@2.9.7 --save-dev
 
 
 
@@ -24,40 +63,51 @@ node_modules
 package-lock.json
 webpack.config.js 
 2) webpack.config.js  파일 내용
-var webpack=requre('webpack'); //webpack 불러오기
+var webpack=require('webpack'); //webpack 불러오기
 
 
 
 module.exports ={
-    entry:'/src/index.js', //합칠파일
+    entry:'./src/index.js', //합칠파일. 전달할파일
     output:{
-        path:_dirname+'/public/',
-        filename:'bundle.js' //output으로 내놓는 파일 추후 script src로 가져와서 쓰게된다.      
+        path:__dirname+'./public/',
+        filename:'bundle.js' //output으로 내놓는 파일 추후 script src=""로 가져와서 쓰게된다.
     },
-    devServer:{
-        hot:true,
+    devServer:{ //게빌서버의 설정
+        hot:true, //리로딩할때마다
         inline:true,
-        host:'0.0.0.0',//기본값은 로컬ip
-        port:4000,
-        contentBase:_dirname+'/public/',
+        host: 'localhost', //기본값은 로컬ip
+        port: 8080,           //개발서버의 포트
+        contentBase:__dirname+'/public/',//index파일의 위치
     },
     module:{
-        loaders:[
-            {test:/\.js$/,
-                loader:'babel',
-                exclude:/node_modules/,
-                query:{
+        rules:[
+          {
+          test:/\.js$/,
+          exclude:/node_modules/,
+          loader:'babel-loader',
+          options:{
                     cacheDirectory:true,
                     presets:['es2015','react']
                 }
-            }
+          }
         ]
     },
-    plugins:[// 자동으로 리로딩
+    plugins:[// 자동으로 리로딩하는 기능()
         new webpack.HotModuleReplacementPlugin()
     ]
 };
 
-3)package.json
+
+3) 개발서버 실행 스크립트
+
+/package.json
+/*----생략-----*/
+"script":[
+    //"build":"webpack"
+    "dev-server":"webpack-dev-server" //추가
+], 
 script에 "dev-server":"webpack-dev-server"
-npm run "dev-server"
+webpack-dev-server
+npm run dev-server
+npm run build

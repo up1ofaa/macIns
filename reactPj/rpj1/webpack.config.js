@@ -1,31 +1,41 @@
-var webpack=requre('webpack'); //webpack 불러오기
+var webpack=require('webpack'); //webpack 불러오기
+const path=require('path');
+
 
 module.exports ={
-    entry:'/src/index.js', //합칠파일
+    mode : 'development',
+    entry: './src/index.js', //합칠파일. 전달할파일
+    //entry: path.resolve(__dirname,'src')+'/index.js', //합칠파일. 전달할파일
     output:{
-        path:_dirname+'/public/',
-        filename:'bundle.js' //output으로 내놓는 파일 추후 script src로 가져와서 쓰게된다.      
+      path: path.resolve(__dirname, 'public'),
+      //path:__dirname+'/public/',
+      publicPath: '/public/',
+      filename:'bundle.js' //output으로 내놓는 파일 추후 script src=""로 가져와서 쓰게된다.
     },
-    devServer:{
-        hot:true,
-        inline:true,
-        host:'0.0.0.0',//기본값은 로컬ip
-        port:4000,
-        contentBase:_dirname+'/public/',
+    devtool: 'inline-source-map',
+    devServer:{ //게빌서버의 설정
+        //hot:true, //리로딩할때마다
+        //inline:true,
+        host: 'localhost', //기본값은 로컬ip
+        port: 8080,           //개발서버의 포트
+        open: true, // open page when start
+        //historyApiFallback: true,
+        contentBase:__dirname+'/public/'//index파일의 위치
     },
     module:{
-        loaders:[
-            {test:/\.js$/,
-                loader:'babel',
-                exclude:/node_modules/,
-                query:{
-                    cacheDirectory:true,
-                    presets:['es2015','react']
-                }
-            }
+        rules:[
+          {
+          test:/\.js|jsx$/,
+          exclude:/node_modules/,
+          use: ['babel-loader']
+          }
         ]
     },
-    plugins:[// 자동으로 리로딩
-        new webpack.HotModuleReplacementPlugin()
+
+    plugins:[// 자동으로 리로딩하는 기능()
+        new webpack.DefinePlugin({ 
+            'process.env.NODE_ENV': JSON.stringify('development')
+        })
     ]
+
 };

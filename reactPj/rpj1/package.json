@@ -1,19 +1,27 @@
 {
-  "name": "rpj1",
+  "name": "rpj",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "react-hot-loader": "^4.13.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "webpack-dev-server": "^3.11.2"
-  },
-  "devDependencies": {},
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"webpack serve --mode development --open --hot",           
+    "build":"webpack --mode production"
   },
   "author": "",
-  "license": "ISC"
-
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "webpack": "^5.32.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2" 
+  },
+  "keywords": [],
+  "description": ""
 }
