@@ -1,44 +1,30 @@
-cd  C:\Users\hy\Desktop\codeInfo\codeInfo\reactPj\rpj
+cd  C:\Users\hy\Desktop\codeInfo\macIns\reactPj\rpj1
 
 
 1)프로젝트 생성
-npm init
+npm init -y
 
 npm i -D webpack webpack-cli
-npm install -g webpack
-npm install -g webpack-dev-server
 npm install -D webpack-dev-server
+npm install -D react react-dom
+npm install -D react-hot-loader
 
-npm install --save-dev react react-dom
-npm install --save-dev react-hot-loader
-npm install --save-dev @babel/preset-react
-npm install -D babel-loader@latest @babel/core@latest @babel/preset-env@latest
-npm i -D react-router-dom@next
+npm install -D babel-loader@latest @babel/core@latest @babel/preset-env@latest  @babel/preset-react
+
 
 /*----생략-----*/   
 "script":[
     //"build":"webpack"
     "start" :"webpack serve"
-    "dev-server":"webpack-dev-server" //추가
+    "dev-server":"webpack-dev-server" //webpack-cli 3.x:
     "build": "webpack",
-    "start": "webpack serve"
+    "start": "webpack serve"          //webpack-cli 4.x:
+    "start":"webpack serve --mode development --open --hot", 
+    "build":"webpack --mode development"          
+    "build":"webpack --mode production"
 ],
-script에 "dev-server":"webpack-dev-server"
+
 webpack-dev-server
 npm run dev-server
 npm run build
 npm run start
-
-Uncaught ReferenceError: reutrn is not defined
-
- For webpack-cli 3.x:
-
-"scripts": {
-  "start:dev": "webpack-dev-server"
-}
-
- For webpack-cli 4.x:
-
- "scripts": {
-  "start:dev": "webpack serve"
-}

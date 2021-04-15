@@ -9,20 +9,19 @@ sudo npm install -g webpack webpack-dev-server
 1)프로젝트 생성
 mkdir rpj
 cd rpj
-npm init 
+npm init -y
 //package.json 파일 생성
 
-npm i -D webpack wepack-cli
-2)React설치
-npm install --save react react-dom 
-//위치에 node_modules폴더와 package-lock.json파일 생성되어있음
 
+2)React설치
+//위치에 node_modules폴더와 package-lock.json파일 생성되어있음
+npm install -D react react-dom
+npm install -D react-hot-loader
 
 
 3)개발 의존 모듈 설치
+//webpack설정하기
 npm i -D webpack webpack-cli
-npm install -g webpack
-npm install -g webpack-dev-server
 npm install -D webpack-dev-server
 
 이 C:\Users\{사용자이름}\AppData\Roaming\npm 를 고급 시스템 설정 > 환경 변수 에서 시스템 변수 'Path'에 추가해 준다.
@@ -37,10 +36,7 @@ npm install --save-dev babel-loader@7
 npm install -D babel-loader@latest @babel/core@latest @babel/preset-env@latest
 npm install -D @babel/preset-react
 npm install --save-dev react-hot-loader webpack webpack-dev-server
-//npm install webpack-cli -D  dsfd
-
-
-
+//npm install webpack-cli -D 
 
 npm run dev-server 실행시 아래 와 같이 
 Cannot find module 'webpack-cli/bin/config-yargs' 오류메시지
@@ -55,59 +51,89 @@ sudo npm install webpack@3.8.0 --save-dev
 npm install webpack-dev-server@2.9.7 --save-dev
 
 
+npm install -D babel-loader@latest
+npm install -D @babel/core@latest 
+npm install -D @babel/preset-env@latest  
+npm install -D @babel/preset-react
 
 
-3.webpack설정하기
+2. 연동파일 생성
 1) 경로 아래폴더,파일과 동등한 위치에 생성
 node_modules
-package-lock.json
-webpack.config.js 
+package-lock.json //script 수정
+webpack.config.js //파일생성
+.babelrc          //파일생성
+.jshintrc         //파일생성
+
 2) webpack.config.js  파일 내용
 var webpack=require('webpack'); //webpack 불러오기
-
-
-
+const path=require('path');
 module.exports ={
-    entry:'./src/index.js', //합칠파일. 전달할파일
+    mode : 'development',
+    entry: './src/index.js',            //합칠파일. 전달할파일
+
     output:{
-        path:__dirname+'./public/',
-        filename:'bundle.js' //output으로 내놓는 파일 추후 script src=""로 가져와서 쓰게된다.
+      path: path.resolve(__dirname, 'public'),
+      publicPath: '/public/',
+      filename:'bundle.js'              //output으로 내놓는 파일 추후 script src=""로 가져와서 쓰게된다.
     },
-    devServer:{ //게빌서버의 설정
-        hot:true, //리로딩할때마다
+    devtool: 'inline-source-map',
+    devServer:{                         //게빌서버의 설정
+        hot:true,                       //리로딩할때마다
         inline:true,
-        host: 'localhost', //기본값은 로컬ip
-        port: 8080,           //개발서버의 포트
-        contentBase:__dirname+'/public/',//index파일의 위치
+        host: 'localhost',              //기본값은 로컬ip
+        port: 8080,                     //개발서버의 포트
+        open: true,                     // open page when start
+        contentBase:__dirname+'/public/'//index파일의 위치
     },
     module:{
         rules:[
           {
-          test:/\.js$/,
+          test:/\.js|jsx$/,
           exclude:/node_modules/,
-          loader:'babel-loader',
-          options:{
-                    cacheDirectory:true,
-                    presets:['es2015','react']
-                }
+          use: ['babel-loader']
           }
         ]
     },
     plugins:[// 자동으로 리로딩하는 기능()
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.DefinePlugin({ 
+            'process.env.NODE_ENV': JSON.stringify('development')
+        })
     ]
 };
 
-
-3) 개발서버 실행 스크립트
-
-/package.json
-/*----생략-----*/
+3) package.json
+//개발서버 실행 스크립트
+//package.json
+/*----생략-----*/   
 "script":[
     //"build":"webpack"
-    "dev-server":"webpack-dev-server" //추가
-], 
-script에 "dev-server":"webpack-dev-server"
+    "start" :"webpack serve"
+    "dev-server":"webpack-dev-server" //webpack-cli 3.x:
+    "build": "webpack",
+    "start": "webpack serve"          //webpack-cli 4.x:
+    "start":"webpack serve --mode development --open --hot",           
+    "build":"webpack --mode production"
+],
+
+4) .babelrc
+{
+  "presets": [
+        "@babel/env",
+        "@babel/react"
+    ]
+}
+ 
+5) .jshintrc 
+{
+  "esversion" : 6
+}
+
+3. 실행 방법
 webpack-dev-server
 npm run dev-server
 npm run build
+npm run start
+
+
+
