@@ -8,9 +8,16 @@ npm i -D webpack webpack-cli
 npm install -D webpack-dev-server
 npm install -D react react-dom
 npm install -D react-hot-loader
+npm install -D react-refresh
 
 npm install -D babel-loader@latest @babel/core@latest @babel/preset-env@latest  @babel/preset-react
 
+//새로고침 없이 파일 작성원할때 다만, 화면output  경로가 지정이 안된다
+npm install -D webpack-dev-server@4.0.0-beta.0
+
+//npm uninstall -D webpack-dev-server@4.0.0-beta.2
+npm install -D react-refresh
+npm install -D @pmmmwh/react-refresh-webpack-plugin
 
 /*----생략-----*/   
 "script":[
@@ -22,9 +29,11 @@ npm install -D babel-loader@latest @babel/core@latest @babel/preset-env@latest  
     "start":"webpack serve --mode development --open --hot", 
     "build":"webpack --mode development"          
     "build":"webpack --mode production"
+   
 ],
 
 webpack-dev-server
 npm run dev-server
 npm run build
+npm run start
 npm run start
