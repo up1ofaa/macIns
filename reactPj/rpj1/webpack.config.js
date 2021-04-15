@@ -4,22 +4,20 @@ const path=require('path');
 
 module.exports ={
     mode : 'development',
-    entry: './src/index.js', //합칠파일. 전달할파일
-    //entry: path.resolve(__dirname,'src')+'/index.js', //합칠파일. 전달할파일
+    entry: './src/index.js',            //합칠파일. 전달할파일
+
     output:{
       path: path.resolve(__dirname, 'public'),
-      //path:__dirname+'/public/',
       publicPath: '/public/',
-      filename:'bundle.js' //output으로 내놓는 파일 추후 script src=""로 가져와서 쓰게된다.
+      filename:'bundle.js'              //output으로 내놓는 파일 추후 script src=""로 가져와서 쓰게된다.
     },
     devtool: 'inline-source-map',
-    devServer:{ //게빌서버의 설정
-        //hot:true, //리로딩할때마다
-        //inline:true,
-        host: 'localhost', //기본값은 로컬ip
-        port: 8080,           //개발서버의 포트
-        open: true, // open page when start
-        //historyApiFallback: true,
+    devServer:{                         //게빌서버의 설정
+        hot:true,                       //리로딩할때마다
+        inline:true,
+        host: 'localhost',              //기본값은 로컬ip
+        port: 8080,                     //개발서버의 포트
+        open: true,                     // open page when start
         contentBase:__dirname+'/public/'//index파일의 위치
     },
     module:{
