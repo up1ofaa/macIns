@@ -1,0 +1,48 @@
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-hot-loader": "^3.0.0-beta.3"
+{   
+    babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
+
+  cd  C:\Users\hy\Desktop\codeInfo\macIns\reactPj\hotpj
+cd /Users/hy/Desktop/work/macIns/reactPj/hotpj
+
+1)프로젝트 생성
+npm init -y
+
+npm i -D webpack@1.13.1 
+npm install -D webpack-dev-server@1.14.1
+npm install -D react@15.3.1 react-dom@15.3.1
+npm install -D react-hot-loader@3.0.0-beta.3
+
+npm install -D babel-loader@6.2.4 babel-core@6.9.1 babel-preset-es2015@6.9.0  babel-preset-react@6.5.0 babel-preset-stage-0@6.5.0
+
+
+//
+
+/*----생략-----*/   
+"script":[
+    ,"build" : "webpack"
+    ,"dev-server" : "webpack-dev-server --https --open"
+    ,"dev-server" : "webpack-dev-server --open --https"
+   
+    ,"dev-server" : "webpack-dev-server --open --https --cert private.pem --key private.key "
+   
+],
+
+npm run build
+npm run dev-server
+
+/*---------------*/
+webpack.config.js
+host: '127.0.0.1', //mac전용ip
+
+/*---------------*/
+http://127.0.0.1:5500
