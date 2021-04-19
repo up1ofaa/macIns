@@ -1,11 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
 import ContactInfo from './ContactInfo';
+import ContactDetails from './ContactDetails';
 //
 export default class Contact extends React.Component{
     constructor(props){
     super(props);
     this.state ={
+            selectedKey:-1,
             keyword:'',
             contactData:[
                { name :'abet',
@@ -19,22 +21,33 @@ export default class Contact extends React.Component{
                 },
                 { name :'rira',
                 phone:'010-0000-0004'
+               },
+               { name :'kelly',
+                phone:'010-0000-0005'
                }
             ]
         };
        
-        this.handleChnage=this.handleChnage.bind(this);
+        //임의 메소드를 만들때는 반드시  this와 bind를 해줘야한다
+        this.handleChange=this.handleChange.bind(this);
+        this.handleClick=this.handleClick.bind(this);
     }
 
-    handleChnage(e){
+    handleChange(e){//이벤트 객체
         this.setState({
             keyword: e.target.value
         });
     }
 
+    handleClick(key){
+        this.setState({
+            selectedKey: key
+        });
+    }
+
     render(){
         const mapToComponents =(data)=>{
-            data.sort();
+            data.sort();//유니코드를 비교하여 정렬
             data=data.filter(
                 (contact) => {
                     return contact.name.toLowerCase()
@@ -42,7 +55,10 @@ export default class Contact extends React.Component{
                     }
                 );
             return data.map((contact,i)=>{
-                return(<ContactInfo contact={contact} key={i}/>);
+                return(<ContactInfo contact={contact} 
+                                    key={i}
+                                    onClick={()=> this.handleClick(i)}
+                                    />);
             });
         }; 
 
@@ -53,9 +69,12 @@ export default class Contact extends React.Component{
                 <input  name="ipt_search" 
                         placeholder="search"
                         value={this.state.keyword}
-                        onChange ={this.handleChnage}
+                        onChange ={this.handleChange}
                         ></input>
                 <div>{mapToComponents(this.state.contactData)}</div>
+                <ContactDetails isSelected={this.state.selectedKey!=-1}
+                                contact={this.state.contactData[this.state.selectedKey]}
+                    />
             </div>
         );
     }
@@ -86,5 +105,4 @@ function filterItems(query){
         return el.toLowerCase().indexOf(query.toLowerCase()) >-1;
     })
 }
-
-**/
+*/
