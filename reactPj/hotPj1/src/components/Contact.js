@@ -54,10 +54,12 @@ export default class Contact extends React.Component{
                     .indexOf(this.state.keyword.toLowerCase())>-1;
                     }
                 );
-            return data.map((contact,i)=>{
+            return data.map((contact,i)=>{//배열.map(매개변수,인덱스)> 매개변수는 배열의 특정 요소값
                 return(<ContactInfo contact={contact} 
                                     key={i}
-                                    onClick={()=> this.handleClick(i)}
+                                    onClick={()=> this.handleClick(i)} //여기 onClick이벤트는 컴포넌트에서 사용못함, 단지 컴포넌트 props 역할임
+                                  //  onClick={this.handleClick(i)} //이런식으로 컴포넌트의 메소드() 구현할수 없음
+                                  // 2-4. state강좌에서 메소드()는 랜더링될때마다 무한으로 실행하기 때문임
                                     />);
             });
         }; 
@@ -106,3 +108,10 @@ function filterItems(query){
     })
 }
 */
+
+/*
+props : 변하지 않은 컴포넌트 요소로 설정, 객체전달가능
+state : 로직에의해 초기값과 달리 변할수 있음 setState 사용
+class내의 메소드 : 임의의 메소드 안에서 this를 사용할 경우, constructor 안에서 this가 무엇인지 설정하는 행위(bind해줘야함)
+
+*/ 
